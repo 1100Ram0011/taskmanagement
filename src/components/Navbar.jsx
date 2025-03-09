@@ -227,7 +227,7 @@ const Navbar = ({ toggleSidebar }) => {
 
           {/* 📜 Profile Dropdown */}
           {isProfileOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md text-gray-900">
+            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md text-gray-900 z-50">
               <button className="block w-full px-4 py-2 text-left hover:bg-gray-200">View Profile</button>
               <button className="block w-full px-4 py-2 text-left hover:bg-gray-200">Change Password</button>
               <button className="block w-full px-4 py-2 text-left text-red-600 hover:bg-gray-200" onClick={handleLogout}>

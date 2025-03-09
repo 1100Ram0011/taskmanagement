@@ -227,8 +227,8 @@ const Sidebar = () => {
                 path === item.link.split("/")[1] ? "bg-blue-500" : "hover:bg-gray-700"
               )}
             >
-              {item.icon}
-              <span className="hidden md:inline">{item.label}</span>
+              {item.icon}{item.label}
+              <span className="hidden  text-white md:inline"></span>
             </Link>
           </li>
         ))}
@@ -238,3 +238,81 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import { Link, useLocation } from "react-router-dom";
+// import { useSelector } from "react-redux";
+// import {
+//   MdDashboard,
+//   MdSettings,
+//   MdOutlineAddTask,
+//   MdTaskAlt,
+//   MdOutlinePendingActions,
+// } from "react-icons/md";
+// import { FaUsers, FaTrashAlt } from "react-icons/fa";
+
+// const linkData = [
+//   { label: "Dashboard", link: "/dashboard", icon: <MdDashboard size={20} /> },
+//   { label: "Tasks", link: "/tasks", icon: <MdOutlineAddTask size={20} /> },
+//   { label: "Settings", link: "/settings", icon: <MdSettings size={20} /> },
+//   { label: "Completed", link: "/completed", icon: <MdTaskAlt size={20} /> },
+//   { label: "Teams", link: "/teams", icon: <FaUsers size={20} /> },
+//   { label: "In Progress", link: "/in-progress", icon: <MdOutlinePendingActions size={20} /> },
+//   { label: "To Do", link: "/todo", icon: <MdOutlinePendingActions size={20} /> },
+//   { label: "Trash", link: "/trash", icon: <FaTrashAlt size={20} /> },
+// ];
+
+// const Sidebar = () => {
+//   const { user } = useSelector((state) => state.auth);
+//   const location = useLocation();
+//   const path = location.pathname.split("/")[1];
+
+//   return (
+//     <div className="h-screen w-60 bg-gray-900 text-white fixed p-4">
+//       <h1 className="text-xl font-bold flex items-center gap-2">
+//         <MdOutlineAddTask size={24} />
+//         <span className="hidden md:inline">Task Manager</span>
+//       </h1>
+
+//       <ul className="mt-6 space-y-2">
+//         {linkData.map((item, index) => (
+//           <li key={index}>
+//             <Link
+//               to={item.link}
+//               className={`flex items-center gap-3 p-3 rounded-lg text-white transition-all duration-300 ${
+//                 path === item.link.split("/")[1] ? "bg-blue-500" : "hover:bg-gray-700"
+//               }`}
+//             >
+//               {item.icon}
+//               <span className="hidden md:inline">{item.label}</span>
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default Sidebar;
