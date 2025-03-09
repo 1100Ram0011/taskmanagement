@@ -48,7 +48,7 @@ const User = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))}  
           </tbody>
         </table>
       </div>
