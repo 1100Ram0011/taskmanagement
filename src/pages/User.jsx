@@ -163,13 +163,12 @@ const Users = () => {
       <div className='w-full md:px-1 px-0 mb-6'>
         <div className='flex items-center justify-between mb-8'>
           {/* <Title title='Team Members' /> */}
-       <Button
+          <Button
   label="Add New User"
   icon={<IoMdAdd className="text-xl" />}
-  className="flex items-center gap-3 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 active:bg-blue-800 transition-all duration-300 ease-in-out w-[10px]"
+  className="flex items-center gap-3 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 active:bg-blue-800 transition-all duration-300 ease-in-out"
   onClick={() => setOpen(true)}
 />
-
 
         </div>
 
