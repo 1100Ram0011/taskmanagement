@@ -61,6 +61,7 @@ function App() {
           <Route path="/todo/:status" element={<Tasks />} />
           <Route path="/task/:id" element={<TaskDetail />} />
           <Route path="/team" element={<User />} />
+
           <Route path="/trashed" element={<Trash />} />
           <Route path="/in-progress" element={<Tasks />} />
           <Route path="/todo" element={<Tasks />} />
