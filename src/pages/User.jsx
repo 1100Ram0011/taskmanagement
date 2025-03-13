@@ -163,12 +163,14 @@ const Users = () => {
       <div className='w-full md:px-1 px-0 mb-6'>
         <div className='flex items-center justify-between mb-8'>
           {/* <Title title='Team Members' /> */}
-          <Button
-            label='Add New User'
-            icon={<IoMdAdd className='text-lg' />}
-            className='flex flex-row-reverse gap-1 items-center bg-blue-600 text-white rounded-md 2xl:py-2.5'
-            onClick={() => setOpen(true)}
-          />
+       <Button
+  label="Add New User"
+  icon={<IoMdAdd className="text-xl" />}
+  className="flex items-center gap-3 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 active:bg-blue-800 transition-all duration-300 ease-in-out w-[10px]"
+  onClick={() => setOpen(true)}
+/>
+
+
         </div>
 
         <div className='bg-white px-2 md:px-4 py-4 shadow-md rounded'>
