@@ -64,7 +64,7 @@ import { IoMdAdd } from "react-icons/io";
 // import { getInitials } from "../utils";
 import clsx from "clsx";
 // import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
-// import AddUser from "../components/AddUser";
+import AddUser from "../components/AddUser";
 
 // Dummy Data
 const dummyUsers = [
@@ -185,7 +185,7 @@ const Users = () => {
         </div>
       </div>
 
-      {/* <AddUser open={open} setOpen={setOpen} addUser={addUser} /> */}
+      <AddUser open={open} setOpen={setOpen} addUser={addUser} />
 {/* 
       <ConfirmatioDialog
         open={openDialog}
