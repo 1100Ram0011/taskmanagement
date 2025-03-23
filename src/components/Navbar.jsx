@@ -28,11 +28,11 @@ const Navbar = ({ toggleSidebar }) => {
 
       {/* ✅ Search Bar */}
       <div className="flex items-center bg-blue-400 px-3 py-2 rounded-md w-full max-w-sm ml-4">
-        <MdOutlineSearch className="text-gray-400" />
+        <MdOutlineSearch className="text-white" />
         <input
           type="text"
           placeholder="Search..."
-          className="bg-transparent outline-none px-2 text-white placeholder-gray-400 w-full"
+          className="bg-transparent outline-none px-2 text-white placeholder-white w-full"
         />
       </div>
 
