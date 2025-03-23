@@ -20,14 +20,14 @@ const Navbar = ({ toggleSidebar }) => {
   };
 
   return (
-    <nav className="bg-gray-900 text-white px-6 py-4 flex justify-between items-center">
+    <nav className=" bg-blue-300 text-white px-6 py-4 flex justify-between items-center">
       {/* ✅ Sidebar Toggle Button */}
       <button onClick={toggleSidebar} className="text-2xl text-white focus:outline-none lg:hidden">
         <FaBars /> {/* ☰ Menu Icon */}
       </button>
 
       {/* ✅ Search Bar */}
-      <div className="flex items-center bg-gray-800 px-3 py-2 rounded-md w-full max-w-sm ml-4">
+      <div className="flex items-center bg-blue-400 px-3 py-2 rounded-md w-full max-w-sm ml-4">
         <MdOutlineSearch className="text-gray-400" />
         <input
           type="text"

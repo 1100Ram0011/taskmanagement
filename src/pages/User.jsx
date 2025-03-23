@@ -57,13 +57,14 @@
 // };
 
 // export default User;
+
 import React, { useState, useEffect } from "react";
-// import Title from "./Title";
+ 
 import Button from "../components/Button";
 import { IoMdAdd } from "react-icons/io";
-// import { getInitials } from "../utils";
+ 
 import clsx from "clsx";
-// import ConfirmatioDialog, { UserAction } from "../components/Dialogs";
+ 
 import AddUser from "../components/AddUser";
 
 // Dummy Data

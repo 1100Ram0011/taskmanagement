@@ -34,7 +34,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className={clsx("fixed w-60 h-screen bg-gray-900 text-white p-4")}>
+    <div className={clsx("fixed w-60 h-screen bg-blue-300  text-white p-4")}>
       <h1 className="text-xl font-bold flex items-center gap-2">
         <MdOutlineAddTask />
         <span className="hidden md:inline">Task Manager</span>
