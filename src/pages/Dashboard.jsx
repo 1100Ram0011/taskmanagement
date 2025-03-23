@@ -90,7 +90,7 @@ export default function Dashboard() {
 
             {/* ✅ Users Table (with Active/Inactive & Hours) */}
             <div className="mt-10 bg-white p-6 rounded-xl shadow-lg">
-                <h2 className="text-lg font-semibold mb-4">👥 User List</h2>
+                <h2 className="text-lg font-semibold mb-4">👥 Users List</h2>
                 <UserTable />
             </div>
         </div>
