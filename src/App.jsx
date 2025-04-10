@@ -88,12 +88,12 @@ import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import Navbar from "./componentss/Navbar";
 import Sidebar from "./componentss/Sidebar";
-import Login from "./pages/Login";
-import TaskDetails from "./pages/TaskDetails";
-import Tasks from "./pages/Tasks";
-import Trash from "./pages/Trash";
-import Users from "./pages/Users";
-import Dashboard from "./pages/dashboard";
+import Login from "./pagess/Login";
+import TaskDetails from "./pagess/TaskDetails";
+import Tasks from "./pagess/Tasks";
+import Trash from "./pagess/Trash";
+import Users from "./pagess/Users";
+import Dashboard from "./pagess/dashboard";
 import { setOpenSidebar } from "./redux/slices/authSlice";
 
 function Layout() {
