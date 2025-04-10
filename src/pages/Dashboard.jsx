@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Summary } from "../assets/data"; // ✅ Ensure correct path
-import Chart from "../components/Chart";
+import Chart from "../componentss/Chart";
 
 export default function Dashboard() {
     const navigate = useNavigate();

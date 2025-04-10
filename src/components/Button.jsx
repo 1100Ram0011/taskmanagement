@@ -1,19 +1,15 @@
+import clsx from "clsx";
 import React from "react";
-import clsx from "clsx"; // Import clsx for conditional classes
 
-const Button = ({ type = "button", label, onClick, className, disabled }) => {
+const Button = ({ icon, className, label, type, onClick = () => {} }) => {
   return (
     <button
-      type={type}
+      type={type || "button"}
+      className={clsx("px-3 py-2 outline-none", className)}
       onClick={onClick}
-      disabled={disabled}
-      className={clsx(
-        " p-0 m-0  bg-blue-600 text-white rounded-md font-semibold transition-all",
-        "hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed",
-        className // Allow additional custom styles
-      )}
     >
-      {label}
+      <span>{label}</span>
+      {icon && icon}
     </button>
   );
 };

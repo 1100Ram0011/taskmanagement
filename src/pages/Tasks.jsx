@@ -82,9 +82,9 @@
 
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Title from "../components/Title";
-import BoardView from "../components/BoardView";
-import ListView from "../components/ListView";
+import Title from "../componentss/Title";
+import BoardView from "../componentss/BoardView";
+import ListView from "../componentss/ListView";
 
 const Tasks = () => {
   const location = useLocation();

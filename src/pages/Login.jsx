@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Textbox from "../components/Textbox";
-import Button from "../components/Button";
+import Textbox from "../componentss/Textbox";
+import Button from "../componentss/Button";
 
 const Login = () => {
   
