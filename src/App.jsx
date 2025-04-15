@@ -14,6 +14,8 @@ import Trash from "./pages/Trash";
 import Users from "./pages/Users";
 import Dashboard from "./pages/dashboard";
 import { setOpenSidebar } from "./redux/slices/authSlice";
+import MeetingRoom from './pages/MeetingRoom'; // <-- make sure the component exists
+import ChatRoom from './pages/ChatWindow';
 
 function Layout() {
   const { user } = useSelector((state) => state.auth);
@@ -99,6 +101,9 @@ function App() {
         <Route element={<Layout />}>
           <Route index path='/' element={<Navigate to='/dashboard' />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path="/meeting-room" element={<MeetingRoom />} /> {/* <-- Add this route */}
+          <Route path="/chat-room" element={<ChatRoom />} /> {/* Chat Room route */}
+          {/* Add any other routes here */}
           <Route path='/tasks' element={<Tasks />} />
           <Route path='/completed/:status' element={<Tasks />} />
           <Route path='/in-progress/:status' element={<Tasks />} />

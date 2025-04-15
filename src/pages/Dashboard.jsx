@@ -1,4 +1,7 @@
-import React from "react";
+// import React from "react";
+ 
+import React, { useState } from 'react';
+ 
 import {
   MdAdminPanelSettings,
   MdKeyboardArrowDown,
@@ -146,6 +149,24 @@ const UserTable = ({ users }) => {
   );
 };
 const Dashboard = () => {
+   // ✅ These must be inside the Dashboard component, at the top
+   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [videoWindowSize, setVideoWindowSize] = useState({ width: 300, height: 200 });
+   // Toggle functions
+  const toggleChat = () => setIsChatOpen(!isChatOpen);
+  const toggleVideo = () => setIsVideoOpen(!isVideoOpen);
+  // Handle resizing of video window
+  const handleResize = (e) => {
+    const newWidth = e.clientX;
+    const newHeight = e.clientY;
+    if (newWidth > 200 && newWidth < 600 && newHeight > 150 && newHeight < 400) {
+      setVideoWindowSize({
+        width: newWidth,
+        height: newHeight,
+      });
+    }
+  };
   const totals = summary.tasks;
 
   const stats = [
@@ -211,8 +232,79 @@ const Dashboard = () => {
         <h4 className='text-xl text-gray-600 font-semibold'>
           Chart by Priority
         </h4>
-        <Chart />
+        <Chart /> </div>     
+        
+        <div className="relative h-screen py-4">
+      <div className="flex gap-4 my-4">
+        {/* Toggle Buttons */}
+        <button
+          onClick={toggleVideo}
+          className="bg-blue-600 text-white px-4 py-2 rounded shadow z-50"
+        >
+          {isVideoOpen ? "Close Meeting" : "Start Meeting"}
+        </button>
+
+        <button
+          onClick={toggleChat}
+          className="bg-green-600 text-white px-4 py-2 rounded shadow z-50"
+        >
+          {isChatOpen ? "Close Chat" : "Open Chat"}
+        </button>
       </div>
+
+      {/* Chat Window (Right side) */}
+      
+      {isChatOpen && (
+        <div className="fixed top-24 right-4 w-[300px] h-[400px] bg-white border shadow-lg z-40 rounded-lg p-4">
+          <h2 className="text-lg font-semibold mb-2">Chat</h2>
+          <div className="h-[300px] overflow-y-auto border p-2 mb-2">Chat Box</div>
+          <input
+            type="text"
+            className="w-full border rounded px-2 py-1"
+            placeholder="Type a message..."
+          />
+          <button
+            onClick={() => setIsChatOpen(false)}
+            className="text-sm text-red-500 mt-2"
+          >
+            Close
+          </button>
+        </div>
+      )}
+
+      {/* Jitsi Video Meeting (Left side) */}
+      {isVideoOpen && (
+        <div
+          className="fixed top-24 left-4 bg-white border shadow-lg z-40 rounded-lg p-4"
+          style={{
+            width: `${videoWindowSize.width}px`,
+            height: `${videoWindowSize.height}px`,
+            resize: "both",  // Make the window resizable
+            overflow: "hidden", // Hide content overflow when resizing
+            minWidth: "200px", // Set minimum width
+            minHeight: "150px", // Set minimum height
+          }}
+          onMouseMove={handleResize}
+        >
+          <h2 className="text-lg font-semibold mb-2">Meeting</h2>
+          {/* Jitsi Embed */}
+          <iframe
+            src="https://meet.jit.si/YourRoomName"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            allow="camera; microphone; fullscreen; display-capture"
+            className="rounded-md"
+          ></iframe>
+          <button
+            onClick={() => setIsVideoOpen(false)}
+            className="text-sm text-red-500 mt-4"
+          >
+            Close
+          </button>
+        </div>
+      )}
+    </div>
 
       <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
         {/* /left */}
