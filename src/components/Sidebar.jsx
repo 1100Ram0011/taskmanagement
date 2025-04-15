@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MdDashboard,
   MdOutlineAddTask,
@@ -7,10 +7,12 @@ import {
   MdTaskAlt,
 } from "react-icons/md";
 import { FaTasks, FaTrashAlt, FaUsers } from "react-icons/fa";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
 import clsx from "clsx";
+import OpenChat from "./OpenChat";
 
 const linkData = [
   {
@@ -48,9 +50,16 @@ const linkData = [
     link: "trashed",
     icon: <FaTrashAlt />,
   },
+  {
+    label: "Chat",
+    link: "chat",
+    icon: <IoChatboxEllipsesOutline />,
+  },
 ];
 
 const Sidebar = () => {
+  const [chatOpen, setChatOpen] = useState(false);
+
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -75,27 +84,46 @@ const Sidebar = () => {
         )}
       >
         {el.icon}
-        <span className='hover:text-[#2564ed]'>{el.label}</span>
+        <span className="hover:text-[#2564ed]">{el.label}</span>
       </Link>
     );
   };
   return (
-    <div className='w-full  h-full flex flex-col gap-6 p-5'>
-      <h1 className='flex gap-1 items-center'>
-        <p className='bg-blue-600 p-2 rounded-full'>
-          <MdOutlineAddTask className='text-white text-2xl font-black' />
+    <div className="w-full  h-full flex flex-col gap-6 p-5">
+      <h1 className="flex gap-1 items-center">
+        <p className="bg-blue-600 p-2 rounded-full">
+          <MdOutlineAddTask className="text-white text-2xl font-black" />
         </p>
-        <span className='text-2xl font-bold text-black'>TaskMe</span>
+        <span className="text-2xl font-bold text-black">TaskMe</span>
       </h1>
 
-      <div className='flex-1 flex flex-col gap-y-5 py-8'>
+      <div className="flex-1 flex flex-col gap-y-5 py-8">
         {sidebarLinks.map((link) => (
           <NavLink el={link} key={link.label} />
         ))}
       </div>
 
-      <div className=''>
-        <button className='w-full flex gap-2 p-2 items-center text-lg text-gray-800'>
+      {/* <div>
+        <div
+          className="flex items-center gap-x-2 ml-4 cursor-pointer bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded shadow"
+          onClick={() => setChatOpen(!chatOpen)}
+        >
+          <IoChatboxEllipsesOutline />
+          <p className="hover:text-gray-600">Chat</p>
+          <span className="ml-auto pr-4 hover:text-gray-600">
+            {chatOpen ? "−" : "+"}
+          </span>
+        </div>
+
+        {chatOpen && (
+          <div className="z-60">
+            <OpenChat />
+          </div>
+        )}
+      </div> */}
+
+      <div className="">
+        <button className="w-full flex gap-2 p-2 items-center text-lg text-gray-800">
           <MdSettings />
           <span>Settings</span>
         </button>

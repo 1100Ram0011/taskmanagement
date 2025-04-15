@@ -1,7 +1,7 @@
 // import React from "react";
- 
-import React, { useState } from 'react';
- 
+
+import React, { useState } from "react";
+
 import {
   MdAdminPanelSettings,
   MdKeyboardArrowDown,
@@ -26,39 +26,39 @@ const TaskTable = ({ tasks }) => {
   };
 
   const TableHeader = () => (
-    <thead className='border-b border-gray-300 '>
-      <tr className='text-black text-left'>
-        <th className='py-2'>Task Title</th>
-        <th className='py-2'>Priority</th>
-        <th className='py-2'>Team</th>
-        <th className='py-2 hidden md:block'>Created At</th>
+    <thead className="border-b border-gray-300 ">
+      <tr className="text-black text-left">
+        <th className="py-2">Task Title</th>
+        <th className="py-2">Priority</th>
+        <th className="py-2">Team</th>
+        <th className="py-2 hidden md:block">Created At</th>
       </tr>
     </thead>
   );
 
   const TableRow = ({ task }) => (
-    <tr className='border-b border-gray-300 text-gray-600 hover:bg-gray-300/10'>
-      <td className='py-2'>
-        <div className='flex items-center gap-2'>
+    <tr className="border-b border-gray-300 text-gray-600 hover:bg-gray-300/10">
+      <td className="py-2">
+        <div className="flex items-center gap-2">
           <div
             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
           />
 
-          <p className='text-base text-black'>{task.title}</p>
+          <p className="text-base text-black">{task.title}</p>
         </div>
       </td>
 
-      <td className='py-2'>
-        <div className='flex gap-1 items-center'>
+      <td className="py-2">
+        <div className="flex gap-1 items-center">
           <span className={clsx("text-lg", PRIOTITYSTYELS[task.priority])}>
             {ICONS[task.priority]}
           </span>
-          <span className='capitalize'>{task.priority}</span>
+          <span className="capitalize">{task.priority}</span>
         </div>
       </td>
 
-      <td className='py-2'>
-        <div className='flex'>
+      <td className="py-2">
+        <div className="flex">
           {task.team.map((m, index) => (
             <div
               key={index}
@@ -72,8 +72,8 @@ const TaskTable = ({ tasks }) => {
           ))}
         </div>
       </td>
-      <td className='py-2 hidden md:block'>
-        <span className='text-base text-gray-600'>
+      <td className="py-2 hidden md:block">
+        <span className="text-base text-gray-600">
           {moment(task?.date).fromNow()}
         </span>
       </td>
@@ -81,8 +81,8 @@ const TaskTable = ({ tasks }) => {
   );
   return (
     <>
-      <div className='w-full md:w-2/3 bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded'>
-        <table className='w-full'>
+      <div className="w-full md:w-2/3 bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded">
+        <table className="w-full">
           <TableHeader />
           <tbody>
             {tasks?.map((task, id) => (
@@ -97,26 +97,26 @@ const TaskTable = ({ tasks }) => {
 
 const UserTable = ({ users }) => {
   const TableHeader = () => (
-    <thead className='border-b border-gray-300 '>
-      <tr className='text-black  text-left'>
-        <th className='py-2'>Full Name</th>
-        <th className='py-2'>Status</th>
-        <th className='py-2'>Created At</th>
+    <thead className="border-b border-gray-300 ">
+      <tr className="text-black  text-left">
+        <th className="py-2">Full Name</th>
+        <th className="py-2">Status</th>
+        <th className="py-2">Created At</th>
       </tr>
     </thead>
   );
 
   const TableRow = ({ user }) => (
-    <tr className='border-b border-gray-200  text-gray-600 hover:bg-gray-400/10'>
-      <td className='py-2'>
-        <div className='flex items-center gap-3'>
-          <div className='w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-violet-700'>
-            <span className='text-center'>{getInitials(user?.name)}</span>
+    <tr className="border-b border-gray-200  text-gray-600 hover:bg-gray-400/10">
+      <td className="py-2">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-violet-700">
+            <span className="text-center">{getInitials(user?.name)}</span>
           </div>
 
           <div>
             <p> {user.name}</p>
-            <span className='text-xs text-black'>{user?.role}</span>
+            <span className="text-xs text-black">{user?.role}</span>
           </div>
         </div>
       </td>
@@ -131,13 +131,13 @@ const UserTable = ({ users }) => {
           {user?.isActive ? "Active" : "Disabled"}
         </p>
       </td>
-      <td className='py-2 text-sm'>{moment(user?.createdAt).fromNow()}</td>
+      <td className="py-2 text-sm">{moment(user?.createdAt).fromNow()}</td>
     </tr>
   );
 
   return (
-    <div className='w-full md:w-1/3 bg-white h-fit px-2 md:px-6 py-4 shadow-md rounded'>
-      <table className='w-full mb-5'>
+    <div className="w-full md:w-1/3 bg-white h-fit px-2 md:px-6 py-4 shadow-md rounded">
+      <table className="w-full mb-5">
         <TableHeader />
         <tbody>
           {users?.map((user, index) => (
@@ -149,18 +149,26 @@ const UserTable = ({ users }) => {
   );
 };
 const Dashboard = () => {
-   // ✅ These must be inside the Dashboard component, at the top
-   const [isChatOpen, setIsChatOpen] = useState(false);
+  // ✅ These must be inside the Dashboard component, at the top
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const [videoWindowSize, setVideoWindowSize] = useState({ width: 300, height: 200 });
-   // Toggle functions
+  const [videoWindowSize, setVideoWindowSize] = useState({
+    width: 300,
+    height: 200,
+  });
+  // Toggle functions
   const toggleChat = () => setIsChatOpen(!isChatOpen);
   const toggleVideo = () => setIsVideoOpen(!isVideoOpen);
   // Handle resizing of video window
   const handleResize = (e) => {
     const newWidth = e.clientX;
     const newHeight = e.clientY;
-    if (newWidth > 200 && newWidth < 600 && newHeight > 150 && newHeight < 400) {
+    if (
+      newWidth > 200 &&
+      newWidth < 600 &&
+      newHeight > 150 &&
+      newHeight < 400
+    ) {
       setVideoWindowSize({
         width: newWidth,
         height: newHeight,
@@ -202,11 +210,11 @@ const Dashboard = () => {
 
   const Card = ({ label, count, bg, icon }) => {
     return (
-      <div className='w-full h-32 bg-white p-5 shadow-md rounded-md flex items-center justify-between'>
-        <div className='h-full flex flex-1 flex-col justify-between'>
-          <p className='text-base text-gray-600'>{label}</p>
-          <span className='text-2xl font-semibold'>{count}</span>
-          <span className='text-sm text-gray-400'>{"110 last month"}</span>
+      <div className="w-full h-32 bg-white p-5 shadow-md rounded-md flex items-center justify-between">
+        <div className="h-full flex flex-1 flex-col justify-between">
+          <p className="text-base text-gray-600">{label}</p>
+          <span className="text-2xl font-semibold">{count}</span>
+          <span className="text-sm text-gray-400">{"110 last month"}</span>
         </div>
 
         <div
@@ -221,40 +229,41 @@ const Dashboard = () => {
     );
   };
   return (
-    <div classNamee='h-full py-4'>
-      <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
+    <div classNamee="h-full py-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
         {stats.map(({ icon, bg, label, total }, index) => (
           <Card key={index} icon={icon} bg={bg} label={label} count={total} />
         ))}
       </div>
 
-      <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
-        <h4 className='text-xl text-gray-600 font-semibold'>
+      <div className="w-full bg-white my-16 p-4 rounded shadow-sm">
+        <h4 className="text-xl text-gray-600 font-semibold">
           Chart by Priority
         </h4>
-        <Chart /> </div>     
-        
-        <div className="relative h-screen py-4">
-      <div className="flex gap-4 my-4">
-        {/* Toggle Buttons */}
-        <button
-          onClick={toggleVideo}
-          className="bg-blue-600 text-white px-4 py-2 rounded shadow z-50"
-        >
-          {isVideoOpen ? "Close Meeting" : "Start Meeting"}
-        </button>
+        <Chart />{" "}
+      </div>
 
-        <button
+      <div className="relative h-screen py-4">
+        <div className="flex gap-4 my-4">
+          {/* Toggle Buttons */}
+          <button
+            onClick={toggleVideo}
+            className="bg-blue-600 text-white px-4 py-2 rounded shadow z-50"
+          >
+            {isVideoOpen ? "Close Meeting" : "Start Meeting"}
+          </button>
+
+          {/* <button
           onClick={toggleChat}
           className="bg-green-600 text-white px-4 py-2 rounded shadow z-50"
         >
           {isChatOpen ? "Close Chat" : "Open Chat"}
-        </button>
-      </div>
+        </button> */}
+        </div>
 
-      {/* Chat Window (Right side) */}
-      
-      {isChatOpen && (
+        {/* Chat Window (Right side) */}
+
+        {/* {isChatOpen && (
         <div className="fixed top-24 right-4 w-[300px] h-[400px] bg-white border shadow-lg z-40 rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-2">Chat</h2>
           <div className="h-[300px] overflow-y-auto border p-2 mb-2">Chat Box</div>
@@ -270,43 +279,43 @@ const Dashboard = () => {
             Close
           </button>
         </div>
-      )}
+      )} */}
 
-      {/* Jitsi Video Meeting (Left side) */}
-      {isVideoOpen && (
-        <div
-          className="fixed top-24 left-4 bg-white border shadow-lg z-40 rounded-lg p-4"
-          style={{
-            width: `${videoWindowSize.width}px`,
-            height: `${videoWindowSize.height}px`,
-            resize: "both",  // Make the window resizable
-            overflow: "hidden", // Hide content overflow when resizing
-            minWidth: "200px", // Set minimum width
-            minHeight: "150px", // Set minimum height
-          }}
-          onMouseMove={handleResize}
-        >
-          <h2 className="text-lg font-semibold mb-2">Meeting</h2>
-          {/* Jitsi Embed */}
-          <iframe
-            src="https://meet.jit.si/YourRoomName"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            allow="camera; microphone; fullscreen; display-capture"
-            className="rounded-md"
-          ></iframe>
-          <button
-            onClick={() => setIsVideoOpen(false)}
-            className="text-sm text-red-500 mt-4"
+        {/* Jitsi Video Meeting (Left side) */}
+        {isVideoOpen && (
+          <div
+            className="fixed top-24 left-4 bg-white border shadow-lg z-40 rounded-lg p-4"
+            style={{
+              width: `${videoWindowSize.width}px`,
+              height: `${videoWindowSize.height}px`,
+              resize: "both", // Make the window resizable
+              overflow: "hidden", // Hide content overflow when resizing
+              minWidth: "200px", // Set minimum width
+              minHeight: "150px", // Set minimum height
+            }}
+            onMouseMove={handleResize}
           >
-            Close
-          </button>
-        </div>
-      )}
-    </div>
+            <h2 className="text-lg font-semibold mb-2">Meeting</h2>
+            {/* Jitsi Embed */}
+            <iframe
+              src="https://meet.jit.si/YourRoomName"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allow="camera; microphone; fullscreen; display-capture"
+              className="rounded-md"
+            ></iframe>
+            <button
+              onClick={() => setIsVideoOpen(false)}
+              className="text-sm text-red-500 mt-4"
+            >
+              Close
+            </button>
+          </div>
+        )}
+      </div>
 
-      <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
+      <div className="w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8">
         {/* /left */}
 
         <TaskTable tasks={summary.last10Task} />
