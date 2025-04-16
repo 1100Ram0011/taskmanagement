@@ -150,14 +150,12 @@ const UserTable = ({ users }) => {
 };
 const Dashboard = () => {
   // ✅ These must be inside the Dashboard component, at the top
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [videoWindowSize, setVideoWindowSize] = useState({
     width: 300,
     height: 200,
   });
   // Toggle functions
-  const toggleChat = () => setIsChatOpen(!isChatOpen);
   const toggleVideo = () => setIsVideoOpen(!isVideoOpen);
   // Handle resizing of video window
   const handleResize = (e) => {
@@ -253,33 +251,7 @@ const Dashboard = () => {
             {isVideoOpen ? "Close Meeting" : "Start Meeting"}
           </button>
 
-          {/* <button
-          onClick={toggleChat}
-          className="bg-green-600 text-white px-4 py-2 rounded shadow z-50"
-        >
-          {isChatOpen ? "Close Chat" : "Open Chat"}
-        </button> */}
         </div>
-
-        {/* Chat Window (Right side) */}
-
-        {/* {isChatOpen && (
-        <div className="fixed top-24 right-4 w-[300px] h-[400px] bg-white border shadow-lg z-40 rounded-lg p-4">
-          <h2 className="text-lg font-semibold mb-2">Chat</h2>
-          <div className="h-[300px] overflow-y-auto border p-2 mb-2">Chat Box</div>
-          <input
-            type="text"
-            className="w-full border rounded px-2 py-1"
-            placeholder="Type a message..."
-          />
-          <button
-            onClick={() => setIsChatOpen(false)}
-            className="text-sm text-red-500 mt-2"
-          >
-            Close
-          </button>
-        </div>
-      )} */}
 
         {/* Jitsi Video Meeting (Left side) */}
         {isVideoOpen && (

@@ -8,11 +8,11 @@ import {
 } from "react-icons/md";
 import { FaTasks, FaTrashAlt, FaUsers } from "react-icons/fa";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { MdOutlineVideoCall } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
 import clsx from "clsx";
-import OpenChat from "./OpenChat";
 
 const linkData = [
   {
@@ -54,6 +54,11 @@ const linkData = [
     label: "Chat",
     link: "chat",
     icon: <IoChatboxEllipsesOutline />,
+  },
+  {
+    label: "Meeting",
+    link: "meeting",
+    icon: <MdOutlineVideoCall />,
   },
 ];
 
@@ -102,25 +107,6 @@ const Sidebar = () => {
           <NavLink el={link} key={link.label} />
         ))}
       </div>
-
-      {/* <div>
-        <div
-          className="flex items-center gap-x-2 ml-4 cursor-pointer bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded shadow"
-          onClick={() => setChatOpen(!chatOpen)}
-        >
-          <IoChatboxEllipsesOutline />
-          <p className="hover:text-gray-600">Chat</p>
-          <span className="ml-auto pr-4 hover:text-gray-600">
-            {chatOpen ? "−" : "+"}
-          </span>
-        </div>
-
-        {chatOpen && (
-          <div className="z-60">
-            <OpenChat />
-          </div>
-        )}
-      </div> */}
 
       <div className="">
         <button className="w-full flex gap-2 p-2 items-center text-lg text-gray-800">
