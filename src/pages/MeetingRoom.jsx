@@ -37,9 +37,9 @@ const MeetingRoom = () => {
           }}
           onMouseMove={handleResize}
         >
-          <h2 className="text-lg font-semibold mb-2">Meeting</h2>
+          <h2 className="text-lg font-semibold mb-2">Meeting</h2> */}
           {/* Jitsi Embed */}
-          <iframe
+          {/* <iframe
             src="https://meet.jit.si/YourRoomName"
             width="100%"
             height="100%"
