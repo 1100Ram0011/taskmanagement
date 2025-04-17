@@ -74,7 +74,7 @@ const MobileSidebar = () => {
             )}
             onClick={() => closeSidebar()}
           >
-            <div className="bg-white w-3/4 h-full">
+            <div className="bg-white w-3/4 h-full overflow-y-auto">
               <div className="w-full flex justify-end px-5 mt-5">
                 <button
                   onClick={() => closeSidebar()}
