@@ -1,13 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const chatMessageSchema = new mongoose.Schema({
-  senderId: String,
-  message: String,
-  roomName: String,
-  timestamp: {
-    type: Date,
-    default: Date.now
-  }
+const chatSchema = new mongoose.Schema({
+  participants: [{ type: String }], // userId strings
+  isGroup: { type: Boolean, default: false },
 });
 
-module.exports = mongoose.model("ChatMessage", chatMessageSchema);
+export default mongoose.model("Chat", chatSchema);

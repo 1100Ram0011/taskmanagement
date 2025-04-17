@@ -107,6 +107,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           {/* Add any other routes here */}
           <Route path="/meeting" element={<MeetingRoom />} />
+          <Route path='/tasks' element={<Tasks />} />
           <Route path="/completed/:status" element={<Tasks />} />
           <Route path="/in-progress/:status" element={<Tasks />} />
           <Route path="/todo/:status" element={<Tasks />} />
