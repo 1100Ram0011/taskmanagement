@@ -4,6 +4,9 @@ import User from "../models/user.js";
 
 export const createTask = async (req, res) => {
   try {
+    console.log("Request Body: ", req.body);
+    console.log("Received Body:", req.body);
+
     const { userId } = req.user;
 
     const { title, team, stage, date, priority, assets } = req.body;
