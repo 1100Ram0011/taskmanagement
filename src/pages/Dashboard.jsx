@@ -218,18 +218,16 @@ const Dashboard = () => {
   ];
 
   const Card = ({ label, count, bg, cardBg, icon }) => {
-    console.log("cardBg:", cardBg);
-
     return (
       <div
         className={clsx(
           "w-full h-32 p-5 shadow-md rounded-md flex items-center justify-between",
-          COLOR_MAP[cardBg] // dynamically mapped to full Tailwind class
+          COLOR_MAP[cardBg]
         )}
       >
         <div className="h-full flex flex-1 flex-col justify-between">
-          <p className="text-base text-gray-600">{label}</p>
-          <span className="text-2xl font-semibold">{count}</span>
+          <p className="text-base font-bold">{label}</p>
+          <span className="text-2xl font-normal">{count}</span>
           <span className="text-sm text-gray-700">{"110 last month"}</span>
         </div>
 
