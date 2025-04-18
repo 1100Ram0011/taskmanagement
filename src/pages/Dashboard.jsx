@@ -1,7 +1,7 @@
 // import React from "react";
 
 import React, { useState } from "react";
-
+import JitsiVideoCall from "../components/JitsiVideoCall";  
 import {
   MdAdminPanelSettings,
   MdKeyboardArrowDown,
@@ -218,16 +218,18 @@ const Dashboard = () => {
   ];
 
   const Card = ({ label, count, bg, cardBg, icon }) => {
+    console.log("cardBg:", cardBg);
+
     return (
       <div
         className={clsx(
           "w-full h-32 p-5 shadow-md rounded-md flex items-center justify-between",
-          COLOR_MAP[cardBg]
+          COLOR_MAP[cardBg] // dynamically mapped to full Tailwind class
         )}
       >
-        <div className="h-full flex flex-1 flex-col justify-between">
-          <p className="text-base font-bold">{label}</p>
-          <span className="text-2xl font-normal">{count}</span>
+        <div className="h-5rem flex flex-1 flex-col justify-between">
+          <p className="text-base text-gray-600">{label}</p>
+          <span className="text-2xl font-semibold">{count}</span>
           <span className="text-sm text-gray-700">{"110 last month"}</span>
         </div>
 
@@ -259,7 +261,7 @@ const Dashboard = () => {
 
       <div className="w-full bg-white my-16 p-4 rounded shadow-sm">
         <h4 className="text-xl text-gray-600 font-semibold">
-          Chart by Priority of Tasks
+          Chart by Priority
         </h4>
         <Chart />{" "}
       </div>
@@ -273,8 +275,13 @@ const Dashboard = () => {
 
         <UserTable users={summary.users} />
       </div>
+      <JitsiVideoCall
+            url="https://meet.jit.si/yourRoomName" // Replace with dynamic room name
+            onResize={handleResize}
+          />
     </div>
   );
 };
 
 export default Dashboard;
+ 
