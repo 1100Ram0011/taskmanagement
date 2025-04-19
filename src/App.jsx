@@ -7,7 +7,7 @@ import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 import TaskDetails from "./pages/TaskDetails";
 import Tasks from "./pages/Tasks";
 import Trash from "./pages/Trash";
@@ -17,6 +17,10 @@ import { setOpenSidebar } from "./redux/slices/authSlice";
 import MeetingRoom from "./pages/MeetingRoom"; //
 import OpenChat from "./components/OpenChat";
 import Chat from "./pages/Chat";
+import HomePage from "./pages/Homepage";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import AuthLayout from "./components/AuthLayout";
 
 function Layout() {
   const { user } = useSelector((state) => state.auth);
@@ -100,6 +104,7 @@ function App() {
     <main className="w-full min-h-screen bg-[#f3f4f6] ">
       <Routes>
         <Route element={<Layout />}>
+          {/* <Route path="/" element={<HomePage />} /> */}
           <Route index path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/openChat" element={<OpenChat />} />
@@ -107,7 +112,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           {/* Add any other routes here */}
           <Route path="/meeting" element={<MeetingRoom />} />
-          <Route path='/tasks' element={<Tasks />} />
+          <Route path="/tasks" element={<Tasks />} />
           <Route path="/completed/:status" element={<Tasks />} />
           <Route path="/in-progress/:status" element={<Tasks />} />
           <Route path="/todo/:status" element={<Tasks />} />
