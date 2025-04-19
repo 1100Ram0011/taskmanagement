@@ -54,8 +54,8 @@ const TaskCard = ({ task }) => {
           </span>
         </>
 
-        <div className='w-full border-t border-gray-200 my-2' />
-        <div className='flex items-center justify-between mb-2'>
+        {/* <div className='w-full border-t border-gray-200 my-2' /> */}
+        {/* <div className='flex items-center justify-between mb-2'>
           <div className='flex items-center gap-3'>
             <div className='flex gap-1 items-center text-sm text-gray-600'>
               <BiMessageAltDetail />
@@ -84,7 +84,7 @@ const TaskCard = ({ task }) => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* sub tasks */}
         {task?.subTasks?.length > 0 ? (
@@ -94,9 +94,9 @@ const TaskCard = ({ task }) => {
             </h5>
 
             <div className='p-4 space-x-8'>
-              <span className='text-sm text-gray-600'>
+              {/* <span className='text-sm text-gray-600'>
                 {formatDate(new Date(task?.subTasks[0]?.date))}
-              </span>
+              </span> */}
               <span className='bg-blue-600/10 px-3 py-1 rounded0full text-blue-700 font-medium'>
                 {task?.subTasks[0].tag}
               </span>

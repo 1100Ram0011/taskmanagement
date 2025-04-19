@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   MdDashboard,
   MdOutlineAddTask,
@@ -12,7 +12,7 @@ import { MdOutlineVideoCall } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setOpenSidebar } from "../redux/slices/authSlice";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
 import clsx from "clsx";
 
 const linkData = [
@@ -64,7 +64,6 @@ const linkData = [
 ];
 
 const Sidebar = () => {
-  const [chatOpen, setChatOpen] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -85,17 +84,20 @@ const Sidebar = () => {
         to={el.link}
         onClick={closeSidebar}
         className={clsx(
-          "w-full lg:w-3/4 flex gap-2 px-3 py-2 rounded-full items-center text-gray-800 text-base hover:bg-blue-500",
-          path === el.link.split("/")[0] ? "bg-blue-700 text-neutral-100" : ""
+          "w-full lg:w-3/4 flex gap-2 px-3 py-2 rounded-full items-center text-gray-700 text-base transition-colors duration-200 hover:bg-indigo-400 hover:text-white",
+          path === el.link.split("/")[0]
+            ? "bg-indigo-600 text-white"
+            : ""
         )}
       >
         {el.icon}
-        <span className="hover:text-white">{el.label}</span>
+        <span>{el.label}</span>
       </Link>
     );
   };
+
   return (
-    <div className="w-full  h-full flex flex-col gap-6 p-5">
+    <div className="w-full h-full flex flex-col gap-6 p-5 bg-sky-100">
       <h1 className="w-28 flex gap-1 items-center">
         <span className="text-2xl font-bold text-black">
           <img src={logo} alt="logo" />
@@ -108,8 +110,8 @@ const Sidebar = () => {
         ))}
       </div>
 
-      <div className="">
-        <button className="w-full flex gap-2 p-2 items-center text-lg text-gray-800">
+      <div>
+        <button className="w-full flex gap-2 p-2 items-center text-lg text-gray-700 hover:bg-indigo-400 hover:text-white rounded-full">
           <MdSettings />
           <span>Settings</span>
         </button>
