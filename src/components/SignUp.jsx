@@ -30,9 +30,9 @@ function SignUp() {
       await axios.post("http://localhost:5000/api/auth/signup", formData);
 
       // Redirect to login page after successful signup
-      navigate("/login");
+      navigate("/auth/login");
     } catch (error) {
-      alert("Signup failed. Try again.")
+      alert("Signup failed. Try again.");
     }
   };
 
@@ -112,7 +112,7 @@ function SignUp() {
           </form>
           <p className="text-xs text-center text-gray-600 mt-[20px]">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-500 hover:underline">
+            <Link to="/auth/login" className="text-blue-500 hover:underline">
               Login
             </Link>
           </p>

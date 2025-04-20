@@ -8,12 +8,12 @@ const HomePage = () => {
       <nav className="w-full flex justify-between items-center px-8 py-4 shadow-md bg-white">
         <h1 className="text-2xl font-bold text-blue-600">Zidio Task Manager</h1>
         <div className="space-x-4">
-          <Link to="/login">
+          <Link to="/auth/login">
             <button className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition">
               Login
             </button>
           </Link>
-          <Link to="/signup">
+          <Link to="/auth/signup">
             <button className="px-4 py-2 rounded-xl bg-gray-200 text-blue-600 hover:bg-gray-300 transition">
               Sign Up
             </button>
@@ -31,7 +31,7 @@ const HomePage = () => {
           organized, productive, and ahead of deadlines. Our intuitive dashboard and
           powerful features streamline project tracking and collaboration.
         </p>
-        <Link to="/signup">
+        <Link to="/auth/signup">
           <button className="bg-blue-600 text-white px-6 py-3 rounded-xl text-lg hover:bg-blue-700 transition">
             Get Started for Free
           </button>

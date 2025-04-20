@@ -103,14 +103,21 @@ function App() {
   return (
     <main className="w-full min-h-screen bg-[#f3f4f6] ">
       <Routes>
+        {/* Public Home */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* Auth Routes */}
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route index element={<Navigate to="login" />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+        </Route>
+
+        {/* Protected Routes */}
         <Route element={<Layout />}>
-          {/* <Route path="/" element={<HomePage />} /> */}
-          <Route index path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/openChat" element={<OpenChat />} />
           <Route path="/chat" element={<Chat />} />
-          <Route path="/chat" element={<Chat />} />
-          {/* Add any other routes here */}
           <Route path="/meeting" element={<MeetingRoom />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/completed/:status" element={<Tasks />} />
@@ -120,8 +127,6 @@ function App() {
           <Route path="/trashed" element={<Trash />} />
           <Route path="/task/:id" element={<TaskDetails />} />
         </Route>
-
-        <Route path="/log-in" element={<Login />} />
       </Routes>
 
       <Toaster richColors />
