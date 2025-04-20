@@ -282,8 +282,12 @@ import routes from "./routes/index.js";
 import { dbConnection } from "./utils/index.js";
 import { errorHandler, routeNotFound } from "./middlewares/errorMiddlewaves.js";
 
+const connectDB = require("./controllers/db.js");
+const authRoutes = require("./routes/authRoutes.js");
+
 dotenv.config();
 dbConnection();
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -300,10 +304,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
+app.use(cors());
 
 app.use("/api", routes);
 app.use(routeNotFound);
 app.use(errorHandler);
+app.use("/api/auth", authRoutes);
 
 const server = http.createServer(app);
 
@@ -369,3 +375,6 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
+// const PORT1 = process.env.PORT || 5000;
+// app.listen(PORT1, () => console.log(`Server running on port ${PORT1}`));

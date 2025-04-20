@@ -32,7 +32,7 @@ function Login() {
       sessionStorage.setItem("token", response.data.token);
 
       // Redirect to dashboard
-      navigate("/home");
+      navigate("/dashboard");
     } catch (error) {
       setErrorMessage(
         error.response?.data?.message || "Login failed. Try again or Signup."
