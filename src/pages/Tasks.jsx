@@ -53,7 +53,7 @@ const Tasks = () => {
       </div>
 
       <Tabs tabs={TABS} setSelected={setSelected}>
-        {!status && (
+        {/* {!status && (
           <div className='w-full flex justify-between gap-4 md:gap-x-12 py-4'>
             <TaskTitle label='To Do' className={TASK_TYPE.todo} />
             <TaskTitle
@@ -62,7 +62,7 @@ const Tasks = () => {
             />
             <TaskTitle label='completed' className={TASK_TYPE.completed} />
           </div>
-        )}
+        )} */}
 
         {selected !== 1 ? (
           <BoardView tasks={tasks} />

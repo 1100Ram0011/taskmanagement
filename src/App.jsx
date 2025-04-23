@@ -40,7 +40,7 @@ function Layout() {
       </div>
     </div>
   ) : (
-    <Navigate to="/log-in" state={{ from: location }} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 }
 
@@ -99,8 +99,11 @@ function App() {
   return (
     <main className="w-full min-h-screen bg-[#f3f4f6] ">
       <Routes>
+   
+    
         <Route element={<Layout />}>
-          <Route index path="/" element={<Navigate to="/log-in" />} />
+        <Route index element={<Navigate to="/login" />} />
+
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/openChat" element={<OpenChat />} />
           <Route path="/chat" element={<Chat />} />
@@ -115,7 +118,7 @@ function App() {
           <Route path="/task/:id" element={<TaskDetails />} />
         </Route>
 
-        <Route path="/log-in" element={<Login />} />
+           <Route path="/login" element={<Login />} />
       </Routes>
 
       <Toaster richColors />
