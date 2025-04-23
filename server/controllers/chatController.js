@@ -1,12 +1,9 @@
-import ChatMessage from "../models/ChatMessage.js";
+import express from 'express';
+import { getMessages } from '../controllers/chatController.js';
 
-export const sendMessage = async (req, res) => {
-  try {
-    const { senderId, message, roomName } = req.body;
-    const newMessage = new ChatMessage({ senderId, message, roomName });
-    await newMessage.save();
-    res.status(201).json(newMessage);
-  } catch (error) {
-    res.status(500).json({ message: "Error sending message" });
-  }
-};
+const router = express.Router();
+
+// API route for getting messages in a room
+router.get('/messages/:roomName', getMessages);
+
+export default router;

@@ -100,7 +100,7 @@ function App() {
     <main className="w-full min-h-screen bg-[#f3f4f6] ">
       <Routes>
         <Route element={<Layout />}>
-          <Route index path="/" element={<Navigate to="/dashboard" />} />
+          <Route index path="/" element={<Navigate to="/log-in" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/openChat" element={<OpenChat />} />
           <Route path="/chat" element={<Chat />} />

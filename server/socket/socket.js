@@ -1,31 +1,70 @@
-import Chat from "../models/Chat.js";
-import Message from "../models/Message.js";
+// import { Server } from 'socket.io';
 
-const socketSetup = (io) => {
-  io.on("connection", (socket) => {
-    console.log("User connected:", socket.id);
+// let io;
 
-    socket.on("joinRoom", (roomName) => {
+// const initSocket = (server) => {
+//   io = new Server(server, {
+//     cors: {
+//       origin: '*',
+//     },
+//   });
+
+//   io.on('connection', (socket) => {
+//     console.log('New client connected');
+
+//     // Join a specific room
+//     socket.on('join room', (roomName) => {
+//       socket.join(roomName);
+//       console.log(`User joined room: ${roomName}`);
+//     });
+
+//     // Handle message send
+//     socket.on('send message', (messageData) => {
+//       // Emit message to the room
+//       io.to(messageData.roomName).emit('receive message', messageData);
+//     });
+
+//     socket.on('disconnect', () => {
+//       console.log('User disconnected');
+//     });
+//   });
+// };
+
+// export { io, initSocket };
+import socketIo from 'socket.io';
+import ChatMessage from '../models/ChatMessage.js';
+
+const socketSetup = (server) => {
+  const io = socketIo(server);
+
+  io.on('connection', (socket) => {
+    console.log('New user connected');
+
+    // Join a room
+    socket.on('joinRoom', (roomName) => {
       socket.join(roomName);
       console.log(`User joined room: ${roomName}`);
     });
 
-    socket.on("sendMessage", async ({ room, message, senderId, receiverId }) => {
-      const chat = await Chat.findOne({ participants: { $all: [senderId, receiverId] } });
-      if (!chat) return;
+    // Handle incoming message
+    socket.on('sendMessage', async (data) => {
+      const { senderId, message, roomName } = data;
 
-      const newMessage = await Message.create({
-        chatId: chat._id,
-        senderId,
-        text: message,
-      });
+      // Save message to the database
+      const newMessage = new ChatMessage({ senderId, message, roomName });
+      await newMessage.save();
 
-      io.to(room).emit("receiveMessage", {
-        senderId,
-        message,
-      });
+      // Emit the message to the room
+      io.to(roomName).emit('receiveMessage', newMessage);
+    });
+
+    // Disconnecting user
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
     });
   });
+
+  return io;
 };
 
 export default socketSetup;

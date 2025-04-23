@@ -268,6 +268,240 @@
 //   console.log(`🚀 Server listening on http://localhost:${PORT}`);
 // });
 
+// import http from "http";
+// import express from "express";
+// import cors from "cors";
+// import morgan from "morgan";
+// import dotenv from "dotenv";
+// import cookieParser from "cookie-parser";
+// import { Server } from "socket.io";
+// import mongoose from "mongoose"; // ✅ Import mongoose for ObjectId conversion
+
+// import Message from "./models/Message.js";
+// import routes from "./routes/index.js";
+// import { dbConnection } from "./utils/index.js";
+// import { errorHandler, routeNotFound } from "./middlewares/errorMiddlewaves.js";
+
+// dotenv.config();
+// dbConnection();
+
+// const app = express();
+// const PORT = process.env.PORT || 8000;
+
+// app.use(
+//   cors({
+//     origin: ["http://localhost:3000", "http://localhost:3001"],
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//     credentials: true,
+//   })
+// );
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(cookieParser());
+// app.use(morgan("dev"));
+
+// app.use("/api", routes);
+// app.use(routeNotFound);
+// app.use(errorHandler);
+
+// const server = http.createServer(app);
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: ["http://localhost:3000", "http://localhost:3001"],
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//     credentials: true,
+//   },
+// });
+
+// let userSocketMap = {}; // userId => socketId mapping
+
+// // ✅ Enable socket communication
+// io.on("connection", (socket) => {
+//   console.log("✅ Client connected");
+
+//   socket.on("register", (userId) => {
+//     userSocketMap[userId] = socket.id;
+//     console.log(`User ${userId} connected with socketId ${socket.id}`);
+//   });
+
+//   socket.on("join-room", (roomName) => {
+//     socket.join(roomName);
+//     console.log(`User joined room: ${roomName}`);
+//   });
+
+//   socket.on("send-message", async ({ roomName, message, senderId, receiverId }) => {
+//     try {
+//       const chat = {
+//         senderId: mongoose.Types.ObjectId(senderId),     // ✅ Fix here
+//         receiverId: mongoose.Types.ObjectId(receiverId), // ✅ Fix here
+//         message,
+//         roomName,
+//       };
+
+//       const newMessage = new Message(chat);
+//       await newMessage.save();
+//       console.log(`💾 Message saved to DB:`, newMessage);
+
+//       const receiverSocketId = userSocketMap[receiverId];
+//       if (receiverSocketId) {
+//         io.to(receiverSocketId).emit("receive-message", chat);
+//         console.log(`📨 Message sent to ${receiverId}:`, chat);
+//       } else {
+//         console.log(`⚠️ Receiver ${receiverId} not found online.`);
+//       }
+//     } catch (error) {
+//       console.error("❌ Error saving message to database:", error);
+//     }
+//   });
+
+//   socket.on("disconnect", () => {
+//     for (const userId in userSocketMap) {
+//       if (userSocketMap[userId] === socket.id) {
+//         delete userSocketMap[userId];
+//         console.log(`❌ User ${userId} disconnected`);
+//       }
+//     }
+//   });
+// });
+
+// server.listen(PORT, () => {
+//   console.log(`🚀 Server running at http://localhost:${PORT}`);
+// });
+
+
+
+// import http from "http";
+// import express from "express";
+// import cors from "cors";
+// import morgan from "morgan";
+// import dotenv from "dotenv";
+// import cookieParser from "cookie-parser";
+// import { Server } from "socket.io";
+// import mongoose from "mongoose";
+
+// import Message from "./models/Message.js";
+// import routes from "./routes/index.js";
+// import { dbConnection } from "./utils/index.js";
+// import { errorHandler, routeNotFound } from "./middlewares/errorMiddlewaves.js";
+
+// dotenv.config();
+// dbConnection();
+
+// const app = express();
+// const PORT = process.env.PORT || 8000;
+
+// // Middleware
+// app.use(
+//   cors({
+//     origin: ["http://localhost:3000", "http://localhost:3001"],
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//     credentials: true,
+//   })
+// );
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+// app.use(cookieParser());
+// app.use(morgan("dev"));
+
+// // Routes
+// app.use("/api", routes);
+// app.use(routeNotFound);
+// app.use(errorHandler);
+
+// // Create HTTP and WebSocket server
+// const server = http.createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: ["http://localhost:3000", "http://localhost:3001"],
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//     credentials: true,
+//   },
+// });
+
+// let userSocketMap = {}; // userId => socket.id
+
+// // WebSocket logic
+// io.on("connection", (socket) => {
+//   console.log("✅ Client connected:", socket.id);
+
+//   // Register socket with userId
+//   socket.on("register", (userId) => {
+//     userSocketMap[userId] = socket.id;
+//     console.log(`📌 User registered: ${userId} (Socket ID: ${socket.id})`);
+//   });
+
+//   // Join a chat room (group or private)
+//   socket.on("join-room", (roomName) => {
+//     socket.join(roomName);
+//     console.log(`📌 User joined room: ${roomName}`);
+//   });
+
+//   // Send a message
+//   socket.on("send-message", async ({ roomName, message, senderId, receiverId }) => {
+//     try {
+//       // Validate ObjectIds
+//       if (
+//         !mongoose.Types.ObjectId.isValid(senderId) ||
+//         !mongoose.Types.ObjectId.isValid(receiverId)
+//       ) {
+//         console.warn("⚠️ Invalid senderId or receiverId:", senderId, receiverId);
+//         return;
+//       }
+
+//       const chat = {
+//         senderId: mongoose.Types.ObjectId(senderId),
+//         receiverId: mongoose.Types.ObjectId(receiverId),
+//         message,
+//         roomName,
+//       };
+
+//       // Save message to DB
+//       const newMessage = new Message(chat);
+//       await newMessage.save();
+//       console.log("💾 Message saved:", newMessage);
+
+//       // Send to receiver if online
+//       const receiverSocketId = userSocketMap[receiverId];
+//       if (receiverSocketId) {
+//         io.to(receiverSocketId).emit("receive-message", newMessage);
+//         console.log(`📨 Message delivered to ${receiverId}`);
+//       } else {
+//         console.log(`📭 Receiver ${receiverId} is offline`);
+//       }
+
+//       // Optional: Also emit to sender's socket (for self-updates)
+//       const senderSocketId = userSocketMap[senderId];
+//       if (senderSocketId) {
+//         io.to(senderSocketId).emit("message-sent", newMessage);
+//       }
+
+//     } catch (error) {
+//       console.error("❌ Error in send-message:", error);
+//     }
+//   });
+
+//   // Handle disconnect
+//   socket.on("disconnect", () => {
+//     for (const userId in userSocketMap) {
+//       if (userSocketMap[userId] === socket.id) {
+//         delete userSocketMap[userId];
+//         console.log(`❌ User disconnected: ${userId}`);
+//         break;
+//       }
+//     }
+//   });
+// });
+
+// // Start server
+// server.listen(PORT, () => {
+//   console.log(`🚀 Server running at http://localhost:${PORT}`);
+// });
+
+
+
 import http from "http";
 import express from "express";
 import cors from "cors";
@@ -275,7 +509,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
-import mongoose from "mongoose"; // ✅ Import mongoose for ObjectId conversion
+import mongoose from "mongoose";
 
 import Message from "./models/Message.js";
 import routes from "./routes/index.js";
@@ -288,6 +522,7 @@ dbConnection();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+// Middleware
 app.use(
   cors({
     origin: ["http://localhost:3000", "http://localhost:3001"],
@@ -301,12 +536,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 
+// Routes
 app.use("/api", routes);
 app.use(routeNotFound);
 app.use(errorHandler);
 
+// Create HTTP and WebSocket server
 const server = http.createServer(app);
-
 const io = new Server(server, {
   cors: {
     origin: ["http://localhost:3000", "http://localhost:3001"],
@@ -315,57 +551,87 @@ const io = new Server(server, {
   },
 });
 
-let userSocketMap = {}; // userId => socketId mapping
+let userSocketMap = {}; // userId => socket.id
 
-// ✅ Enable socket communication
+// WebSocket logic
 io.on("connection", (socket) => {
-  console.log("✅ Client connected");
+  console.log("✅ Client connected:", socket.id);
 
+  // Register socket with userId
   socket.on("register", (userId) => {
     userSocketMap[userId] = socket.id;
-    console.log(`User ${userId} connected with socketId ${socket.id}`);
+    console.log(`📌 User registered: ${userId} (Socket ID: ${socket.id})`);
   });
 
+  // Join a chat room (group or private)
   socket.on("join-room", (roomName) => {
     socket.join(roomName);
-    console.log(`User joined room: ${roomName}`);
+    console.log(`📌 User joined room: ${roomName}`);
   });
 
+  // Send a message
   socket.on("send-message", async ({ roomName, message, senderId, receiverId }) => {
     try {
+      // Validate ObjectIds
+      if (
+        !mongoose.Types.ObjectId.isValid(senderId) ||
+        !mongoose.Types.ObjectId.isValid(receiverId)
+      ) {
+        console.warn("⚠️ Invalid senderId or receiverId:", senderId, receiverId);
+        return;
+      }
+
       const chat = {
-        senderId: mongoose.Types.ObjectId(senderId),     // ✅ Fix here
-        receiverId: mongoose.Types.ObjectId(receiverId), // ✅ Fix here
+        senderId: mongoose.Types.ObjectId(senderId),
+        receiverId: mongoose.Types.ObjectId(receiverId),
         message,
         roomName,
       };
 
+      // Save message to DB
       const newMessage = new Message(chat);
       await newMessage.save();
-      console.log(`💾 Message saved to DB:`, newMessage);
+      console.log("💾 Message saved:", newMessage);
 
+      // Send to receiver if online
       const receiverSocketId = userSocketMap[receiverId];
       if (receiverSocketId) {
-        io.to(receiverSocketId).emit("receive-message", chat);
-        console.log(`📨 Message sent to ${receiverId}:`, chat);
+        io.to(receiverSocketId).emit("receive-message", newMessage);
+        console.log(`📨 Message delivered to ${receiverId}`);
       } else {
-        console.log(`⚠️ Receiver ${receiverId} not found online.`);
+        console.log(`📭 Receiver ${receiverId} is offline`);
       }
+
+      // Optional: Also emit to sender's socket (for self-updates)
+      const senderSocketId = userSocketMap[senderId];
+      if (senderSocketId) {
+        io.to(senderSocketId).emit("message-sent", newMessage);
+      }
+
     } catch (error) {
-      console.error("❌ Error saving message to database:", error);
+      console.error("❌ Error in send-message:", error);
     }
   });
 
+  // Handle user typing event (optional improvement)
+  socket.on("typing", ({ roomName, senderId }) => {
+    socket.to(roomName).emit("user-typing", { senderId });
+    console.log(`📝 User ${senderId} is typing in room: ${roomName}`);
+  });
+
+  // Handle disconnect
   socket.on("disconnect", () => {
     for (const userId in userSocketMap) {
       if (userSocketMap[userId] === socket.id) {
         delete userSocketMap[userId];
-        console.log(`❌ User ${userId} disconnected`);
+        console.log(`❌ User disconnected: ${userId}`);
+        break;
       }
     }
   });
 });
 
+// Start server
 server.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
