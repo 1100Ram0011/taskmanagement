@@ -278,11 +278,11 @@
 
 // export default Chat;
 // src/pages/Chat.jsx
-import React from "react";
+import React, { useState } from "react";
 import Chatbox from "../components/Chatbox";
 import MyChats from "../components/MyChats";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
-import GroupChatModal from "../components/GroupChatModal";
+// import GroupChatModal from "../components/GroupChatModal";
 import { ChatProvider } from "../Context/ChatProvider";
 
 const Chat = () => {
@@ -290,7 +290,7 @@ const Chat = () => {
     <ChatProvider>
       <div className="w-full">
         <SideDrawer />
-        <GroupChatModal />
+        {/* <GroupChatModal onClose={() => setOnClose(false)} /> */}
         <div className="flex h-[80vh]">
           <MyChats />
           <Chatbox />
