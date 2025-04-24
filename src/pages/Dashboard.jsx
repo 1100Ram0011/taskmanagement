@@ -147,13 +147,21 @@ const UserTable = ({ users }) => {
 
 const Dashboard = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const [videoWindowSize, setVideoWindowSize] = useState({ width: 300, height: 200 });
+  const [videoWindowSize, setVideoWindowSize] = useState({
+    width: 300,
+    height: 200,
+  });
 
   const toggleVideo = () => setIsVideoOpen(!isVideoOpen);
   const handleResize = (e) => {
     const newWidth = e.clientX;
     const newHeight = e.clientY;
-    if (newWidth > 200 && newWidth < 600 && newHeight > 150 && newHeight < 400) {
+    if (
+      newWidth > 200 &&
+      newWidth < 600 &&
+      newHeight > 150 &&
+      newHeight < 400
+    ) {
       setVideoWindowSize({ width: newWidth, height: newHeight });
     }
   };
@@ -229,22 +237,46 @@ const Dashboard = () => {
 
   return (
     <div className="h-full py-4">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-        {stats.map(({ icon, bg, label, total, cardBg }, index) => (
-          <Card
-            key={index}
-            icon={icon}
-            bg={bg}
-            label={label}
-            count={total}
-            cardBg={cardBg}
-          />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+        {stats.map(({ icon, label, total }, index) => {
+          const cardBg = ["#f9fafb", "#fefce8", "#ecfdf5", "#f0f9ff"][
+            index % 4
+          ]; // Light gray, yellow, green, blue
+          const iconBg = ["#e5e7eb", "#fef08a", "#bbf7d0", "#bae6fd"][
+            index % 4
+          ]; // Muted tones
+
+          return (
+            <div
+              key={index}
+              className="flex items-center gap-4 p-5 rounded-xl shadow-md hover:shadow-md transition duration-300"
+              style={{ backgroundColor: cardBg }}
+            >
+              <div
+                className="w-14 h-14 flex items-center justify-center rounded-full text-gray-700 text-xl font-semibold shadow-sm"
+                style={{ backgroundColor: iconBg }}
+              >
+                {icon}
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">{label}</p>
+                <h2 className="text-2xl font-semibold text-gray-800">
+                  {total}
+                </h2>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="w-full bg-white my-16 p-4 rounded shadow-sm">
-        <h4 className="text-xl text-gray-600 font-semibold">Chart by Priority</h4>
-        <Chart />
+        <h4 className="text-xl text-gray-600 font-semibold">
+          Chart by Priority
+        </h4>
+        <div className="flex w-full">
+          <Chart />
+          <Chart />
+        </div>
       </div>
 
       <div className="w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8">
