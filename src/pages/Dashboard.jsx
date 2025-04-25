@@ -7,7 +7,7 @@ import {
   MdKeyboardArrowUp,
   MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
-// import { LuClipboardEdit } from "react-icons/lu";
+import { FaClipboard } from "react-icons/fa";
 import { FaNewspaper, FaUsers } from "react-icons/fa";
 import { FaArrowsToDot } from "react-icons/fa6";
 import moment from "moment";
@@ -15,6 +15,7 @@ import { summary } from "../assets/data";
 import clsx from "clsx";
 import { Chart } from "../components/Chart";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
+import RingChart from "../components/RingChart";
 // import UserInfo from "../components/UserInfo";
 
 // const TaskTable = ({ tasks }) => {
@@ -92,55 +93,124 @@ import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 //   );
 // };
 
+// const UserTable = ({ users }) => {
+//   const TableHeader = () => (
+//     <thead className="border-b border-gray-300 ">
+//       <tr className="text-black  text-left">
+//         <th className="py-2">Full Name</th>
+//         <th className="py-2">Status</th>
+//         <th className="py-2">Created At</th>
+//       </tr>
+//     </thead>
+//   );
+
+//   const TableRow = ({ user }) => (
+//     <tr className="border-b border-gray-200  text-gray-600 hover:bg-gray-400/10">
+//       <td className="py-2">
+//         <div className="flex items-center gap-3">
+//           <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-violet-700">
+//             <span className="text-center">{getInitials(user?.name)}</span>
+//           </div>
+//           <div>
+//             <p>{user.name}</p>
+//             <span className="text-xs text-black">{user?.role}</span>
+//           </div>
+//         </div>
+//       </td>
+
+//       <td>
+//         <p
+//           className={clsx(
+//             "w-fit px-3 py-1 rounded-full text-sm",
+//             user?.isActive ? "bg-blue-200" : "bg-yellow-100"
+//           )}
+//         >
+//           {user?.isActive ? "Active" : "Disabled"}
+//         </p>
+//       </td>
+//       <td className="py-2 text-sm">{moment(user?.createdAt).fromNow()}</td>
+//     </tr>
+//   );
+
+//   return (
+//     <div className="w-full md:w-1/3 bg-white h-fit px-2 md:px-6 py-4 shadow-md rounded">
+//       <table className="w-full mb-5">
+//         <TableHeader />
+//         <tbody>
+//           {users?.map((user, index) => (
+//             <TableRow key={index + user?._id} user={user} />
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// };
+
 const UserTable = ({ users }) => {
   const TableHeader = () => (
-    <thead className="border-b border-gray-300 ">
-      <tr className="text-black  text-left">
-        <th className="py-2">Full Name</th>
-        <th className="py-2">Status</th>
-        <th className="py-2">Created At</th>
+    <thead>
+      <tr className="text-left text-sm text-gray-600 border-b border-gray-300">
+        <th className="py-3 px-4">Full Name</th>
+        <th className="py-3 px-4">Status</th>
+        <th className="py-3 px-4">Created At</th>
       </tr>
     </thead>
   );
 
   const TableRow = ({ user }) => (
-    <tr className="border-b border-gray-200  text-gray-600 hover:bg-gray-400/10">
-      <td className="py-2">
+    <tr className="border-b border-gray-100 hover:bg-gray-100/50 transition duration-200">
+      <td className="py-3 px-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full text-white flex items-center justify-center text-sm bg-violet-700">
-            <span className="text-center">{getInitials(user?.name)}</span>
+          <div className="w-9 h-9 rounded-full bg-violet-500 text-white flex items-center justify-center text-sm font-medium">
+            {getInitials(user?.name)}
           </div>
-          <div>
-            <p>{user.name}</p>
-            <span className="text-xs text-black">{user?.role}</span>
+          <div className="flex flex-col">
+            <span className="font-medium text-gray-800">{user?.name}</span>
+            <span className="text-xs text-gray-500">{user?.role}</span>
           </div>
         </div>
       </td>
-
-      <td>
-        <p
+      <td className="py-3 px-4">
+        <span
           className={clsx(
-            "w-fit px-3 py-1 rounded-full text-sm",
-            user?.isActive ? "bg-blue-200" : "bg-yellow-100"
+            "px-3 py-1 rounded-full text-sm font-medium",
+            user?.isActive
+              ? "bg-green-100 text-green-700"
+              : "bg-yellow-100 text-yellow-800"
           )}
         >
           {user?.isActive ? "Active" : "Disabled"}
-        </p>
+        </span>
       </td>
-      <td className="py-2 text-sm">{moment(user?.createdAt).fromNow()}</td>
+      <td className="py-3 px-4 text-sm text-gray-600">
+        {moment(user?.createdAt).fromNow()}
+      </td>
     </tr>
   );
 
   return (
-    <div className="w-full md:w-1/3 bg-white h-fit px-2 md:px-6 py-4 shadow-md rounded">
-      <table className="w-full mb-5">
-        <TableHeader />
-        <tbody>
-          {users?.map((user, index) => (
-            <TableRow key={index + user?._id} user={user} />
-          ))}
-        </tbody>
-      </table>
+    <div className="w-full md:w-1/2 bg-white px-4 py-5 shadow-lg rounded-xl">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">
+        User Overview
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="w-full bg-white rounded-lg">
+          <TableHeader />
+          <tbody>
+            {users?.length > 0 ? (
+              users.map((user, index) => (
+                <TableRow key={user?._id || index} user={user} />
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="text-center py-4 text-gray-500">
+                  No users found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
@@ -196,7 +266,7 @@ const Dashboard = () => {
       _id: "3",
       label: "TASK IN PROGRESS ",
       total: totals["in progress"] || 0,
-      // icon: <LuClipboardEdit />,
+      icon: <FaClipboard />,
       bg: "bg-amber-500",
       cardBg: "yellow",
     },
@@ -269,13 +339,33 @@ const Dashboard = () => {
         })}
       </div>
 
-      <div className="w-full bg-white my-16 p-4 rounded shadow-sm">
+      {/* <div className="w-full bg-white my-16 p-4 rounded shadow-sm">
         <h4 className="text-xl text-gray-600 font-semibold">
           Chart by Priority
         </h4>
-        <div className="flex w-full">
+        <div className="flex w-full gap-2">
           <Chart />
           <Chart />
+        </div>
+      </div> */}
+
+      <div className="flex w-full bg-white my-16 p-4 rounded shadow-sm">
+        <div className=" w-full">
+          <h4 className="text-xl text-gray-600 font-semibold text-center">
+            Chart by Priority
+          </h4>
+          <div className="w-full gap-2">
+            <Chart />
+          </div>
+        </div>
+
+        <div className=" w-full">
+          <h4 className="text-xl text-gray-600 font-semibold text-center">
+            Total Task
+          </h4>
+          <div className="w-full gap-2">
+            <RingChart />
+          </div>
         </div>
       </div>
 
