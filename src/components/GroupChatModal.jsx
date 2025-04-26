@@ -8,7 +8,7 @@ const usersList = [
   { _id: "4", name: "David" },
 ];
 
-const GroupChatModal = () => {
+const GroupChatModal = ({ onClose }) => {
   const { chats, setChats } = ChatState();
   const [groupName, setGroupName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,6 +42,7 @@ const GroupChatModal = () => {
     setGroupName("");
     setSelectedUsers([]);
     setError("");
+    onClose(); // Close the modal
   };
 
   const filteredUsers = usersList.filter(
@@ -51,64 +52,73 @@ const GroupChatModal = () => {
   );
 
   return (
-    <div className="p-4 border mb-4 rounded bg-white shadow">
-      <h3 className="font-bold mb-2 text-lg">Create Group</h3>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-white rounded-xl shadow-lg p-6 w-[90%] max-w-md relative">
+        <button
+          className="absolute top-2 right-3 text-gray-500 text-xl"
+          onClick={onClose}
+        >
+          &times;
+        </button>
 
-      <input
-        type="text"
-        placeholder="Group name"
-        className="border p-2 w-full mb-2 rounded"
-        value={groupName}
-        onChange={(e) => setGroupName(e.target.value)}
-      />
+        <h3 className="font-bold text-xl mb-4">Create Group Chat</h3>
 
-      <input
-        type="text"
-        placeholder="Search users"
-        className="border p-2 w-full mb-2 rounded"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Group name"
+          className="border p-2 w-full mb-3 rounded"
+          value={groupName}
+          onChange={(e) => setGroupName(e.target.value)}
+        />
 
-      {selectedUsers.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-2">
-          {selectedUsers.map((user) => (
+        <input
+          type="text"
+          placeholder="Search users"
+          className="border p-2 w-full mb-3 rounded"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        {selectedUsers.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-3">
+            {selectedUsers.map((user) => (
+              <div
+                key={user._id}
+                className="bg-blue-200 text-sm px-3 py-1 rounded-full flex items-center gap-2"
+              >
+                {user.name}
+                <button
+                  className="text-red-500"
+                  onClick={() => handleRemoveUser(user._id)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="max-h-32 overflow-y-auto border rounded p-2 mb-3">
+          {filteredUsers.map((user) => (
             <div
               key={user._id}
-              className="bg-blue-200 text-sm px-3 py-1 rounded-full flex items-center gap-2"
+              onClick={() => handleSelectUser(user)}
+              className="cursor-pointer p-2 hover:bg-gray-100 rounded"
             >
               {user.name}
-              <button
-                className="text-red-500"
-                onClick={() => handleRemoveUser(user._id)}
-              >
-                &times;
-              </button>
             </div>
           ))}
         </div>
-      )}
 
-      <div className="max-h-32 overflow-y-auto border rounded p-2 mb-2">
-        {filteredUsers.map((user) => (
-          <div
-            key={user._id}
-            onClick={() => handleSelectUser(user)}
-            className="cursor-pointer p-2 hover:bg-gray-100 rounded"
-          >
-            {user.name}
-          </div>
-        ))}
+        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+
+        <button
+          onClick={handleCreateGroup}
+          className="bg-green-500 text-white px-4 py-2 rounded w-full"
+        >
+          Create Group
+        </button>
       </div>
-
-      {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-
-      <button
-        onClick={handleCreateGroup}
-        className="bg-green-500 text-white px-4 py-2 rounded w-full"
-      >
-        Create Group
-      </button>
     </div>
   );
 };

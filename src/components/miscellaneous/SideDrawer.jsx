@@ -214,12 +214,26 @@
 // }
 
 // export default SideDrawer;
-import React from "react";
+import React, {useState} from "react";
+import GroupChatModal from "../GroupChatModal";
 
 const SideDrawer = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <div className="bg-gray-200 p-4">
-      <h1 className="text-xl font-bold">Chat Panel</h1>
+    <div className="flex justify-between bg-[#b0d2de] p-4 mb-2">
+      <h1 className="text-xl flex items-center font-bold">Chat Panel</h1>
+      <div className="flex justify-end">
+        <button
+          className="bg-emerald-600/80 text-white hover:text-blue-800 px-4 py-2 rounded-xl"
+          onClick={() => setShowModal(true)}
+        >
+          + New Group
+        </button>
+      </div>
+      
+      {/* ✅ Render GroupChatModal when showModal is true */}
+      {showModal && <GroupChatModal onClose={() => setShowModal(false)} />}
     </div>
   );
 };
