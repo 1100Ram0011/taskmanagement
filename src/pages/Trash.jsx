@@ -138,7 +138,7 @@ const Trash = () => {
         </div>
       </div>
 
-      {/* <AddUser open={open} setOpen={setOpen} /> */}
+      <AddUser open={open} setOpen={setOpen} />
 
       <ConfirmatioDialog
         open={openDialog}
