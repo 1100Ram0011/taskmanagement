@@ -12,7 +12,7 @@ import { chartData } from "../assets/data";
 // Updated colors to match dashboard UI
 const COLORS = ["#f87171", "#fde047", "#4ade80", "#67e8f9"]; // Red-300, Yellow-300, Green-300, Cyan-300
 
-export const Chart = () => {
+export const Chart = ({data}) => {
   return (
     <ResponsiveContainer width="90%" height={300}>
       <PieChart>
@@ -26,7 +26,7 @@ export const Chart = () => {
           fill="#8884d8"
           label
         >
-          {chartData.map((entry, index) => (
+          {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
