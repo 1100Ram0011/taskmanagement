@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
+import { IoMdSend } from "react-icons/io";
 // src/components/Chatbox.jsx
  
 
@@ -33,7 +34,7 @@ const Chatbox = () => {
     <div className="w-2/3 p-4 flex flex-col border-l">
       <h2 className="text-lg font-semibold mb-2 border-b pb-2">{chatName}</h2>
 
-      <div className="flex-1 overflow-y-auto p-2 space-y-2 bg-gray-50 rounded mb-2">
+      <div className="flex-1 overflow-y-auto p-2 space-y-2 bg-gray-50 border-gray-400 rounded mb-2">
         {messages.map((msg, i) => {
           const isMine = msg.sender === user.name;
           return (
@@ -44,13 +45,13 @@ const Chatbox = () => {
               <div
                 className={`max-w-[60%] p-2 rounded-lg shadow ${
                   isMine
-                    ? "bg-blue-500 text-white text-right"
-                    : "bg-gray-200 text-black text-left"
+                    ? "bg-green-300/60 text-black text-right"
+                    : "bg-blue-300/60 text-black text-left"
                 }`}
               >
-                <div className="text-sm font-medium">{msg.sender}</div>
+                <div className="flex text-sm font-medium">{msg.sender}</div>
                 <div>{msg.content}</div>
-                <div className="text-xs text-gray-300 mt-1">
+                <div className="text-xs text-gray-500/70 mt-1">
                   {msg.timestamp}
                 </div>
               </div>
@@ -69,9 +70,9 @@ const Chatbox = () => {
         />
         <button
           onClick={handleSend}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          Send
+          <IoMdSend />
         </button>
       </div>
     </div>

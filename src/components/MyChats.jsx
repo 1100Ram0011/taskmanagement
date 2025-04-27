@@ -8,7 +8,7 @@ const MyChats = () => {
   const { chats, setSelectedChat, selectedChat } = ChatState();
 
   return (
-    <div className="bg-gray-300 p-4 mr-2 overflow-y-auto h-[calc(100vh-170px)]">
+    <div className="bg-[#a8988799] p-4 mr-2 overflow-y-auto h-[calc(100vh-170px)] rounded-lg">
       <h2 className="text-lg font-semibold mb-4">Chats</h2>
       {chats.length === 0 ? (
         <p className="text-gray-500">No chats available</p>
